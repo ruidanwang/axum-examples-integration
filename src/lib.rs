@@ -4,11 +4,16 @@ pub mod comm;
 pub mod dbsqlx;
 pub mod dbdiesel;
 pub mod metrics;
+pub mod rudis;
 
 use sqlx::postgres::PgPoolOptions;
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use std::time::Duration;
+
+use bb8::Pool;
+use bb8_redis::RedisConnectionManager;
+use bb8_redis::bb8;
 
 pub fn establish_connection() -> PgConnection {
     let diesel_db_url = std::env::var("DATABASE_URL").unwrap_or_else(|_| "postgres://postgres:wangc4@localhost".to_string());
@@ -22,6 +27,11 @@ pub fn establish_diesel_pool() -> deadpool_diesel::Pool<deadpool_diesel::Manager
     deadpool_diesel::postgres::Pool::builder(manager)
         .build()
         .unwrap()
+}
+
+pub async  fn establish_redis_conn_pool()->Pool<RedisConnectionManager>{
+    let manager = RedisConnectionManager::new("redis://localhost").unwrap();
+    bb8::Pool::builder().build(manager).await.unwrap()
 }
 
 pub async fn establish_sqlx_conn()->sqlx::Pool<sqlx::Postgres> {
