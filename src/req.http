@@ -94,3 +94,6 @@ Content-Type: application/json
 
 ### 
 GET http://localhost:3000/diesel/delete_users/2,3 HTTP/1.1
+
+###
+get http://localhost:3001/metrics

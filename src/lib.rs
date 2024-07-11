@@ -3,6 +3,8 @@ pub mod org;
 pub mod comm;
 pub mod dbsqlx;
 pub mod dbdiesel;
+pub mod metrics;
+
 use sqlx::postgres::PgPoolOptions;
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
