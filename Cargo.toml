@@ -1,0 +1,28 @@
+[package]
+name = "webapp"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.86"
+axum = "0.7.5"
+bb8 = "0.8.5"
+deadpool-diesel = {version="0.6.1",features=["postgres"]}
+diesel = {version="2.1.1",features = ["postgres"]}
+diesel_migrations = "2.2.0"
+
+
+metrics = {version="0.23.0",default-features = false }
+metrics-exporter-prometheus = {version="0.15.1",default-features = false }
+reqwest = {version="0.12.5",features=["json"]}
+serde = {version="1.0.203", features = ["derive"] }
+serde_json = "1.0.120"
+sqlx = {version="0.7.4",features = ["runtime-tokio-rustls", "any", "postgres"] }
+thiserror = "1.0.61"
+tokio = {version="1.38.0",features = ["full", "tracing"] }
+tokio-diesel = "0.3.0"
+tower = {version="0.4.13",features=["full"]}
+tower-http = {version="0.5.2",features=["full"]}
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+validator = {version="0.18.1",features=["derive"]}

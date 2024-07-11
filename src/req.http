@@ -1,0 +1,96 @@
+### Post user 请求
+POST http://localhost:3000/users HTTP/1.1
+content-type: application/json
+
+{
+    "username": "wdq001"
+}
+
+###root 请求
+GET http://localhost:3000/ 
+
+###
+GET http://localhost:3000/role/get  HTTP/1.1 HTTP/1.1
+
+###
+GET http://localhost:3000/role/get_wdq
+
+###
+GET http://localhost:3000/user/get_path_parm/123456 HTTP/1.1
+
+###
+GET http://localhost:3000/user/get_query_parm?id=1234567&name=wdq HTTP/1.1
+
+###
+POST http://localhost:3000/user/post_json HTTP/1.1
+Content-Type: application/json
+
+{
+    "id":20001,
+    "username":"wdq",
+    "age":40
+}
+
+###
+POST http://localhost:3000/user/validate_post_json HTTP/1.1
+Content-Type: application/json
+
+{
+    "id":20001,
+    "username":"wdq123",
+    "age":24
+}
+
+###
+GET http://localhost:3000/user/get_user/2002 HTTP/1.1
+
+###
+GET http://localhost:3000/user/get_path_parm_mtil/1001/wdq HTTP/1.1
+
+###
+GET http://localhost:3000/dept/get HTTP/1.1
+
+### 
+GET http://localhost:3000/dept/get_all_header HTTP/1.1
+
+###
+POST http://localhost:3000/dept/get_body_string HTTP/1.1
+
+wdq-body-string
+
+
+###
+GET http://localhost:3000/dept/get_mutil_extra?id=2005&name=wdq HTTP/1.1
+
+###
+GET http://localhost:3000/company/get HTTP/1.1
+
+###
+GET http://localhost:3000/error/route_fall_middle HTTP/1.1
+
+###
+GET http://localhost:3000/reqwest/typed HTTP/1.1
+
+###
+GET http://localhost:3000/reqwest/format HTTP/1.1
+
+### sql
+GET http://localhost:3000/sqlx/get_one HTTP/1.1
+
+###
+GET http://localhost:3000/sqlx/get_many HTTP/1.1
+
+###
+GET http://localhost:3000/diesel/get_all HTTP/1.1
+
+###
+POST http://localhost:3000/diesel/create HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"wdq01",
+    "hair_color":"blue"
+}
+
+### 
+GET http://localhost:3000/diesel/delete_users/2,3 HTTP/1.1
