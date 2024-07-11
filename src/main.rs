@@ -5,7 +5,7 @@ use webapp::{establish_diesel_pool, establish_redis_conn_pool, establish_sqlx_co
 
 use tower::ServiceBuilder;
 use tower_http::trace::TraceLayer;
-use webapp::{comm,dbsqlx,org,dbdiesel,user,metrics};
+use webapp::{comm,dbsqlx,org,dbdiesel,user,metrics,rudis};
 
 
 
@@ -17,7 +17,7 @@ async fn start_main_server() {
 
     let diesel_pool = establish_diesel_pool();
 
-    let redis_pool =establish_redis_conn_pool();
+    let redis_pool =establish_redis_conn_pool().await;
 
     // build our application with a route
     let app = Router::new()
@@ -26,6 +26,7 @@ async fn start_main_server() {
         .merge(comm::app())
         .merge(dbsqlx::app(axum::extract::State(sqlx_pool)))
         .merge(dbdiesel::app(diesel_pool))
+        .merge(rudis::app(redis_pool))
         .layer(ServiceBuilder::new().layer(TraceLayer::new_for_http()))
         .route_layer(middleware::from_fn(metrics::track_metrics));
 
