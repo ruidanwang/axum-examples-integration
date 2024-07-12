@@ -1,11 +1,12 @@
 use diesel::prelude::*;
 use crate::dbdiesel::schema::users;
 
-#[derive(serde::Serialize, Selectable, Queryable)]
+#[derive(serde::Serialize, Selectable, Queryable,Insertable)]
+#[diesel(table_name = users)]
 pub struct User {
-    id: i32,
-    name: String,
-    hair_color: Option<String>,
+    pub id: i32,
+    pub name: String,
+    pub hair_color: Option<String>,
 }
 
 #[derive(serde::Deserialize, Insertable)]
