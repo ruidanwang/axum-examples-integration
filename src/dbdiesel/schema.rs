@@ -1,8 +1,7 @@
 diesel::table! {
-    posts (id) {
-        id -> Int4,
-        title -> Varchar,
-        body -> Text,
-        published -> Bool,
+    users (id) {
+        id -> Integer,
+        name -> Text,
+        hair_color -> Nullable<Text>,
     }
 }

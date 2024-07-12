@@ -4,29 +4,10 @@ use axum::{
     response::Json
 };
 use diesel::prelude::*;
+use crate::dbdiesel::model::*;
+use crate::dbdiesel::schema::users;
 
-// normally part of your generated schema.rs file
-diesel::table! {
-    users (id) {
-        id -> Integer,
-        name -> Text,
-        hair_color -> Nullable<Text>,
-    }
-}
 
-#[derive(serde::Serialize, Selectable, Queryable)]
-pub struct User {
-    id: i32,
-    name: String,
-    hair_color: Option<String>,
-}
-
-#[derive(serde::Deserialize, Insertable)]
-#[diesel(table_name = users)]
-pub struct NewUser {
-    name: String,
-    hair_color: Option<String>,
-}
 
 pub async fn create_user(
     State(pool): State<deadpool_diesel::postgres::Pool>,

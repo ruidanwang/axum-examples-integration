@@ -1,11 +1,16 @@
 use diesel::prelude::*;
+use crate::dbdiesel::schema::users;
 
-#[derive(Queryable, Selectable)]
-#[diesel(table_name = crate::dbdiesel::schema::posts)]
-#[diesel(check_for_backend(diesel::pg::Pg))]
-pub struct Post {
-    pub id: i32,
-    pub title: String,
-    pub body: String,
-    pub published: bool,
+#[derive(serde::Serialize, Selectable, Queryable)]
+pub struct User {
+    id: i32,
+    name: String,
+    hair_color: Option<String>,
+}
+
+#[derive(serde::Deserialize, Insertable)]
+#[diesel(table_name = users)]
+pub struct NewUser {
+    name: String,
+    hair_color: Option<String>,
 }
