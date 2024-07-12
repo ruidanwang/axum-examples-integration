@@ -28,11 +28,18 @@ pub async fn set_key_value(
     let key = parms.get("key").unwrap();
     let value = parms.get("value").unwrap();
     let mut conn = pool.get().await.map_err(internal_error)?;
-    let result: String = conn.set(key,value).await.map_err(internal_error)?;
+    let result: String = conn.set(key, value).await.map_err(internal_error)?;
     Ok(result)
 }
 
-
+pub async fn lower_cmd_get(
+    Path(key): Path<String>,
+    State(pool): State<ConnectionPool>,
+) -> Result<String, (StatusCode, String)> {
+    let mut conn = pool.get().await.map_err(internal_error)?;
+    let result: String = redis::cmd("get").arg(&key).query_async(&mut *conn).await.map_err(internal_error)?;
+    Ok(result)
+}
 
 /// Utility function for mapping any error into a `500 Internal Server Error`
 /// response.
