@@ -7,8 +7,6 @@ use diesel::prelude::*;
 use crate::dbdiesel::model::*;
 use crate::dbdiesel::schema::users;
 
-
-
 pub async fn create_user(
     State(pool): State<deadpool_diesel::postgres::Pool>,
     Json(new_user): Json<NewUser>,
