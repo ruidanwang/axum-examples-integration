@@ -41,6 +41,30 @@ pub async fn lower_cmd_get(
     Ok(result)
 }
 
+// pub async fn redis_transaction(
+//     Path(key): Path<String>,
+//     State(pool): State<ConnectionPool>,)
+// {
+//     let mut conn = pool.get().await.unwrap();
+//     let (new_val,) : (isize,) = redis::transaction(&mut *conn, &[key], |conn, pipe| {
+//         let old_val : isize = conn.get(key).;
+//         pipe
+//             .set(key, old_val + 1).ignore()
+//             .get(key).query(conn)
+//     })?;
+
+    
+// }
+
+// use redis::Commands;
+// let key = "the_key";
+// let (new_val,) : (isize,) = redis::transaction(&mut con, &[key], |con, pipe| {
+//     let old_val : isize = con.get(key)?;
+//     pipe
+//         .set(key, old_val + 1).ignore()
+//         .get(key).query(con)
+// })?;
+
 /// Utility function for mapping any error into a `500 Internal Server Error`
 /// response.
 fn internal_error<E>(err: E) -> (StatusCode, String)
