@@ -105,3 +105,4 @@ GET http://localhost:3000/rudis/get/key HTTP/1.1
 GET http://localhost:3000/rudis/set?key=k1&value=v1 HTTP/1.1
 
 ###
+GET http://localhost:3000/rudis/lowercmd/12 HTTP/1.1
