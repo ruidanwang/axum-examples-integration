@@ -106,3 +106,18 @@ GET http://localhost:3000/rudis/set?key=k1&value=v1 HTTP/1.1
 
 ###
 GET http://localhost:3000/rudis/lowercmd/k1 HTTP/1.1
+
+###
+GET http://localhost:3000/notify/sse/wdq2 HTTP/1.1
+
+### 
+POST http://localhost:3000/notify/admin/send_notification/123 HTTP/1.1
+Content-Type: application/json
+
+{"message":"hello Server Sent Event,hello Server Sent Event"}
+
+###
+GET http://localhost:3000/notify/ws/wdq HTTP/1.1
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Version: 13

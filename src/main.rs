@@ -5,7 +5,8 @@ use webapp::{establish_diesel_pool, establish_redis_conn_pool, establish_sqlx_co
 
 use tower::ServiceBuilder;
 use tower_http::trace::TraceLayer;
-use webapp::{comm,dbsqlx,org,dbdiesel,user,metrics,rudis};
+use webapp::{comm,dbsqlx,org,dbdiesel,user,metrics,rudis,notifications};
+use core::net::SocketAddr;
 
 
 
@@ -27,6 +28,7 @@ async fn start_main_server() {
         .merge(dbsqlx::app(axum::extract::State(sqlx_pool)))
         .merge(dbdiesel::app(diesel_pool))
         .merge(rudis::app(redis_pool))
+        .merge(notifications::app())
         .layer(ServiceBuilder::new().layer(TraceLayer::new_for_http()))
         .route_layer(middleware::from_fn(metrics::track_metrics));
 
@@ -35,7 +37,7 @@ async fn start_main_server() {
         .await
         .unwrap();
     println!("listening on {}", listener.local_addr().unwrap());
-    axum::serve(listener, app).await.unwrap();
+    axum::serve(listener, app.into_make_service_with_connect_info::<SocketAddr>()).await.unwrap();
 }
 
 
