@@ -7,7 +7,7 @@ use crate::notifications::types::{Channels, MessageType, Notification};
 
 
 /// Handle Server Sent Event connection
-pub async fn sse_handler(
+pub async  fn sse_handler(
     State(state): State<Channels>,
     Path(user_id): Path<String>
 ) -> Sse<impl Stream<Item = Result<Event, Infallible>>> {

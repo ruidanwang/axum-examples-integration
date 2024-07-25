@@ -1,8 +1,8 @@
 pub mod sse;
 pub mod ws;
- mod websockets;
+pub mod websockets;
 
- mod types;
+pub mod types;
 
 use axum::routing::{get, post};
 use tokio::sync::broadcast;
