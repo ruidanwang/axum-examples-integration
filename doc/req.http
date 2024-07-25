@@ -116,8 +116,5 @@ Content-Type: application/json
 
 {"message":"hello Server Sent Event,hello Server Sent Event"}
 
+
 ###
-GET http://localhost:3000/notify/ws/wdq HTTP/1.1
-Connection: Upgrade
-Upgrade: websocket
-Sec-WebSocket-Version: 13
