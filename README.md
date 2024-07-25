@@ -11,3 +11,7 @@ Ingegration axum examples in one project and add other function!
 7. redis
 8. metrics
 9. tracing
+
+### logs
+1. 2024-07-25 
+    add send notifications in two ways: server send events and websocket.
